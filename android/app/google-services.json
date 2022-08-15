@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1016545780534",
+    "project_id": "accordchatapp-49569",
+    "storage_bucket": "accordchatapp-49569.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016545780534:android:1d295713f8f08007f7c997",
+        "android_client_info": {
+          "package_name": "com.example.accord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016545780534-96v3hsugskqr2n2b7c15flvr4ca821q8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJdCMmRpyBzqUQDshLg6elh6ua3p-lMMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016545780534-96v3hsugskqr2n2b7c15flvr4ca821q8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
