@@ -14,13 +14,13 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   String username = "";
-    String email = "";
-    String password = "";
+  String email = "";
+  String password = "";
 
-    late TextEditingController _usernameController;
-    late TextEditingController _emailController;
-    late TextEditingController _passwordController;
-  
+  late TextEditingController _usernameController;
+  late TextEditingController _emailController;
+  late TextEditingController _passwordController;
+
   @override
   void initState() {
     _usernameController = TextEditingController();
@@ -43,7 +43,7 @@ class _SignupScreenState extends State<SignupScreen> {
             colorText: Colors.white,
             borderWidth: 2,
             duration: const Duration(seconds: 2));
-            Get.off(const LoginScreen());
+        Get.off(const LoginScreen());
       } else {
         Get.snackbar('Error', result,
             snackPosition: SnackPosition.TOP,

@@ -12,7 +12,11 @@ class UserModel {
   });
 
   fromJson(Map<String, dynamic> json) {
-    UserModel user = UserModel(id: json['id'], name: json['name'], email: json['email'], password: json['password']);
+    UserModel user = UserModel(
+        id: json['id'],
+        name: json['name'],
+        email: json['email'],
+        password: json['password']);
     return user;
   }
 
