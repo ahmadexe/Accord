@@ -1,10 +1,10 @@
-class User {
+class UserModel {
   String? id;
   String name;
   String email;
   String password;
 
-  User({
+  UserModel({
     this.id,
     required this.name,
     required this.email,
@@ -12,16 +12,16 @@ class User {
   });
 
   fromJson(Map<String, dynamic> json) {
-    User user = User(id: json['id'], name: json['name'], email: json['email'], password: json['password']);
+    UserModel user = UserModel(id: json['id'], name: json['name'], email: json['email'], password: json['password']);
     return user;
   }
 
-  toJson(User user) {
+  toJson(UserModel UserModel) {
     Map<String, dynamic> json = {
-      'id': user.id,
-      'name': user.name,
-      'email': user.email,
-      'password': user.password,
+      'id': UserModel.id,
+      'name': UserModel.name,
+      'email': UserModel.email,
+      'password': UserModel.password,
     };
     return json;
   }
