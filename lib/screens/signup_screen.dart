@@ -36,6 +36,7 @@ class _SignupScreenState extends State<SignupScreen> {
       if (result == 'success') {
         Get.snackbar('Success!', 'You have successfully signed up.',
             snackPosition: SnackPosition.TOP,
+            icon: const Icon(Icons.check_circle, color: Colors.green),
             backgroundColor: Colors.green,
             margin: const EdgeInsets.all(10),
             borderColor: Colors.green,
@@ -46,9 +47,10 @@ class _SignupScreenState extends State<SignupScreen> {
       } else {
         Get.snackbar('Error', result,
             snackPosition: SnackPosition.TOP,
-            backgroundColor: Colors.green,
+            icon: const Icon(Icons.error),
+            backgroundColor: Colors.red,
             margin: const EdgeInsets.all(10),
-            borderColor: Colors.green,
+            borderColor: Colors.red,
             colorText: Colors.white,
             borderWidth: 2,
             duration: const Duration(seconds: 2));

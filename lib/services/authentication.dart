@@ -33,4 +33,19 @@ class Authentication {
     }
     return msg;
   }
+
+  Future<String> login(String email, String password) async {
+    String msg = 'An error occured';
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      return 'success';
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return 'User not found';
+      } else if (e.code == 'wrong-password') {
+        return 'Wrong password';
+      }
+    }
+    return msg;
+  }
 }
