@@ -22,7 +22,7 @@ class Authentication {
           'password': user.password,
           'id': user.id,
         });
-        return "Sign up successful.";
+        return "success";
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
