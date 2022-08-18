@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _isLoading = false;
   String email = '';
   String password = '';
   late TextEditingController _emailController;
@@ -128,16 +129,26 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 80,
                     child: ElevatedButton(
                         onPressed: () async {
+                          setState(() {
+                            _isLoading = true;
+                          });
                           await _login(
                               _emailController.text, _passwordController.text);
+                          setState(() {
+                            _isLoading = false;
+                          });
                         },
                         style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all<Color>(primaryColor)),
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(color: Colors.white),
-                        ))),
+                        child: !_isLoading
+                            ? const Text(
+                                'Login',
+                                style: TextStyle(color: Colors.white),
+                              )
+                            : const CircularProgressIndicator(
+                                color: Colors.white,
+                              ))),
                 const SizedBox(height: 8),
                 GestureDetector(
                     onTap: () {

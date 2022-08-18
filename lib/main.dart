@@ -1,5 +1,8 @@
 import 'package:accord/firebase_options.dart';
+import 'package:accord/screens/home_screen.dart';
 import 'package:accord/screens/login_screen.dart';
+import 'package:accord/utils/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +21,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: LoginScreen(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(color: primaryColor,),
+            );
+          }
+          if (snapshot.hasData) {
+            return HomeScreen();
+          }
+          else{
+            return LoginScreen();
+          } 
+        })
+      )
     );
   }
 }

@@ -13,6 +13,8 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  bool _isLoading = false;
+
   String username = "";
   String email = "";
   String password = "";
@@ -171,13 +173,23 @@ class _SignupScreenState extends State<SignupScreen> {
                         name: _usernameController.text,
                         email: _emailController.text,
                         password: _passwordController.text);
+                    setState(() {
+                      _isLoading = true;
+                    });
                     await _signup(user);
+                    setState(() {
+                      _isLoading = false;
+                    });
                   },
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(primaryColor),
                   ),
-                  child: const Text('Sign Up'),
+                  child: !_isLoading
+                      ? const Text('Sign Up')
+                      : const CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
                 ),
               ),
               const SizedBox(
