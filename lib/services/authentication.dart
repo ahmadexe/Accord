@@ -21,6 +21,7 @@ class Authentication {
           'email': user.email,
           'password': user.password,
           'id': user.id,
+          'groups':[]
         });
         return "success";
       }

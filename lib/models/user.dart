@@ -3,12 +3,14 @@ class UserModel {
   String name;
   String email;
   String password;
+  List? groups;
 
   UserModel({
     this.id,
     required this.name,
     required this.email,
     required this.password,
+    this.groups,
   });
 
   fromJson(Map<String, dynamic> json) {
@@ -16,7 +18,8 @@ class UserModel {
         id: json['id'],
         name: json['name'],
         email: json['email'],
-        password: json['password']);
+        password: json['password'],
+        groups: json['groups']);
     return user;
   }
 
@@ -26,6 +29,7 @@ class UserModel {
       'name': UserModel.name,
       'email': UserModel.email,
       'password': UserModel.password,
+      'groups': UserModel.groups,
     };
     return json;
   }
