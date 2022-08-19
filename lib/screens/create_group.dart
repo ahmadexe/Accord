@@ -12,6 +12,9 @@ class CreateGroupScreen extends StatefulWidget {
 }
 
 class _CreateGroupScreenState extends State<CreateGroupScreen> {
+
+  bool _isLoading = false;
+
   TextEditingController _nameController = TextEditingController();
   TextEditingController _descController = TextEditingController();
   TextEditingController _typeController = TextEditingController();
@@ -113,29 +116,39 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                   width: 90,
                   child: ElevatedButton(
                     onPressed: () async {
+                      setState(() {
+                        _isLoading = true;
+                      });
                       String result = await CloudDatabase().createGroup(
                           _nameController.text,
                           _descController.text,
                           _typeController.text);
+                      setState(() {
+                        _isLoading = false;
+                      });
                       if (result == 'success') {
                         Get.snackbar('Success', 'Group has been created',
                             backgroundColor: Colors.green,
                             colorText: Colors.white,
                             snackPosition: SnackPosition.TOP,
                             icon: const Icon(Icons.done));
-                      }
-                      else {
+                      } else {
                         Get.snackbar('Error!', 'An error occured',
                             backgroundColor: Colors.red,
                             colorText: Colors.white,
                             snackPosition: SnackPosition.TOP,
                             icon: const Icon(Icons.error));
                       }
+
                     },
-                    child: Text("Create!"),
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all<Color>(primaryColor)),
+                    child: 
+                    !_isLoading?
+                    const Text("Create!")
+                    :
+                    const CircularProgressIndicator(color: Colors.white,),
                   ))
             ],
           ),
