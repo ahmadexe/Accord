@@ -16,14 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String techAddress =
-      'assets/images/tech.jpg';
-  String scienceAddress =
-      'assets/images/space.jpg';
-  String sportsAddress =
-      'assets/images/sports.jpg';
-  String dailyAddress =
-      'assets/images/newspaper.jpg';
+  String techAddress = 'assets/images/tech.jpg';
+  String scienceAddress = 'assets/images/space.jpg';
+  String sportsAddress = 'assets/images/sports.jpg';
+  String dailyAddress = 'assets/images/newspaper.jpg';
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 tileColor: Colors.white,
-                onTap: ()  {
+                onTap: () {
                   Get.to(CreateGroupScreen());
                 },
                 leading: const Icon(
@@ -112,9 +108,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         labelText: 'Group ID',
                         labelStyle: const TextStyle(color: secondaryColor),
                         isDense: true, // important line
-                        contentPadding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(30, 30, 30, 0),
                         enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
                         focusedBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: primaryColor),
                           borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -172,7 +170,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: 16,
                   ),
                   RoomTypeCard(
-                      text: 'Sports', imgAddress: sportsAddress, function: () {}),
+                      text: 'Sports',
+                      imgAddress: sportsAddress,
+                      function: () {}),
                   const SizedBox(
                     width: 10,
                   ),
@@ -194,7 +194,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 15,),
+              const SizedBox(
+                height: 15,
+              ),
               UsersRooms()
             ],
           ),
