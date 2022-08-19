@@ -16,7 +16,7 @@ class CloudDatabase {
 
       await _firestore.collection('groups').doc(groupId).set({
         'groupid': groupId,
-        'gorupName': name,
+        'groupName': name,
         'description': description,
         'adminid': adminId,
         'adminName': adminName,

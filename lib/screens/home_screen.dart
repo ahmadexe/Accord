@@ -4,6 +4,7 @@ import 'package:accord/services/authentication.dart';
 import 'package:accord/utils/colors.dart';
 import 'package:accord/widgets/room_type_card.dart';
 import 'package:accord/widgets/users_rooms.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -197,7 +198,24 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 15,
               ),
-              UsersRooms()
+
+              StreamBuilder(
+                stream: FirebaseFirestore.instance.collection('groups').snapshots(),
+                builder: (context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: const CircularProgressIndicator(color: primaryColor,),
+                    );
+                  }
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      return UsersRooms(snap: snapshot.data!.docs[index],);
+                    }
+                  );
+                },
+              )
             ],
           ),
         ),
