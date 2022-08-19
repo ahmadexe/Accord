@@ -52,7 +52,7 @@ class RoomTypeCard extends StatelessWidget {
                     )
                   ],
                   image: DecorationImage(
-                      image: NetworkImage(imgAddress), fit: BoxFit.fill)),
+                      image: AssetImage(imgAddress), fit: BoxFit.fill)),
               height: 130,
               width: 220,
             ),
