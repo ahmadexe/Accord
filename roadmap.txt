@@ -2,6 +2,7 @@
     => Search
     => Cards for tech, sports, science, politics
     => My Groups
+    => Create a room
 
 2. Groups 
     -> name
