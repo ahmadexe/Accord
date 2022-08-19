@@ -2,6 +2,7 @@ import 'package:accord/screens/login_screen.dart';
 import 'package:accord/services/authentication.dart';
 import 'package:accord/utils/colors.dart';
 import 'package:accord/widgets/room_type_card.dart';
+import 'package:accord/widgets/users_rooms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -177,6 +178,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
+            const SizedBox(height: 15,),
+            UsersRooms()
           ],
         ),
       ),
