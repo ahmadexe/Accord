@@ -19,8 +19,7 @@ class UsersRooms extends StatelessWidget {
                 offset: Offset(0.5, 0.5),
               )
             ]),
-        child: Expanded(
-          child: Row(
+        child: Row(
             children: [
               const SizedBox(
                 width: 10,
@@ -40,8 +39,7 @@ class UsersRooms extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Expanded(
-                  child: Column(
+                child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -54,17 +52,15 @@ class UsersRooms extends StatelessWidget {
                         SizedBox(
                           height: 60,
                           width: MediaQuery.of(context).size.width * 0.65,
-                          child: Text('This is description ppppppppppppppppppppppppppppppppppppppppppppppp', overflow: TextOverflow.ellipsis,
+                          child: Text('This is description', overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           softWrap: false,),
                         )
                       ],
                   ),
-                ),
               )
             ],
           ),
-        ),
       );
   }
 }

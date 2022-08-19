@@ -71,6 +71,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 tileColor: Colors.white,
+                onTap: ()  {
+                  
+                },
+                leading: const Icon(
+                  Icons.group_sharp,
+                  color: primaryColor,
+                ),
+                title: const Text("Create a group."),
+              ),
+              ListTile(
+                tileColor: Colors.white,
                 onTap: () async {
                   await Authentication().signOut();
                   Get.off(const LoginScreen());
@@ -80,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: primaryColor,
                 ),
                 title: const Text("Log out?"),
-              )
+              ),
             ],
           ),
         ),
