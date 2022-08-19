@@ -165,8 +165,8 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               const SizedBox(height: 30),
               SizedBox(
-                height: 40,
-                width: 80,
+                height: 45,
+                width: 90,
                 child: ElevatedButton(
                   onPressed: () async {
                     UserModel user = UserModel(

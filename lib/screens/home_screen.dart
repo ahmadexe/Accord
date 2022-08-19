@@ -96,103 +96,108 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: TextFormField(
-                  cursorColor: secondaryColor,
-                  decoration: InputDecoration(
-                      hintText: "Enter group id",
-                      isDense: true, // important line
-                      contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                      enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: primaryColor),
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
-                      ),
-                      suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.arrow_forward,
-                            color: secondaryColor,
-                          ))),
-                )),
-            const SizedBox(
-              height: 15,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(12.0),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "What can we help you find?",
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: primaryColor),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 30,
+              ),
+              Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: TextFormField(
+                    cursorColor: secondaryColor,
+                    decoration: InputDecoration(
+                        hintText: "Enter group ID",
+                        labelText: 'Group ID',
+                        labelStyle: const TextStyle(color: secondaryColor),
+                        isDense: true, // important line
+                        contentPadding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+                        enabledBorder: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30))),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: primaryColor),
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                        ),
+                        suffixIcon: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.arrow_forward,
+                              color: secondaryColor,
+                            ))),
+                  )),
+              const SizedBox(
+                height: 15,
+              ),
+              const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "What can we help you find?",
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: primaryColor),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(children: [
-                const SizedBox(
-                  width: 16,
-                ),
-                RoomTypeCard(
-                  text: 'Tech',
-                  imgAddress: techAddress,
-                  function: () {},
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                RoomTypeCard(
-                    text: 'Daily', imgAddress: dailyAddress, function: () {}),
-                const SizedBox(
-                  width: 16,
-                ),
-                RoomTypeCard(
-                    text: 'Science',
-                    imgAddress: scienceAddress,
-                    function: () {}),
-                const SizedBox(
-                  width: 16,
-                ),
-                RoomTypeCard(
-                    text: 'Sports', imgAddress: sportsAddress, function: () {}),
-                const SizedBox(
-                  width: 10,
-                ),
-              ]),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(12.0),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "Your Rooms",
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: primaryColor),
+              const SizedBox(
+                height: 30,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(children: [
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  RoomTypeCard(
+                    text: 'Tech',
+                    imgAddress: techAddress,
+                    function: () {},
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  RoomTypeCard(
+                      text: 'Daily', imgAddress: dailyAddress, function: () {}),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  RoomTypeCard(
+                      text: 'Science',
+                      imgAddress: scienceAddress,
+                      function: () {}),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  RoomTypeCard(
+                      text: 'Sports', imgAddress: sportsAddress, function: () {}),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                ]),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Your Rooms",
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: primaryColor),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 15,),
-            UsersRooms()
-          ],
+              const SizedBox(height: 15,),
+              UsersRooms()
+            ],
+          ),
         ),
       ),
     );
