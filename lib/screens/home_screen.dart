@@ -1,4 +1,7 @@
+import 'package:accord/screens/login_screen.dart';
+import 'package:accord/services/authentication.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         body: Center(
-          child: Text('Home Screen'),
+          child: ElevatedButton(onPressed: () async {await Authentication().signOut();Get.off(LoginScreen());}, child: Text('Logout'))
         ),
       ),
     );

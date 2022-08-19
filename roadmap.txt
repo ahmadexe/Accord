@@ -1,0 +1,13 @@
+1. create home page
+    => Search
+    => Cards for tech, sports, science, politics
+    => My Groups
+
+2. Groups 
+    -> name
+    -> type
+    -> description
+    -> Admin
+    -> members
+    -> Admin id
+    -> messages (collection) (sender, text, time (since epoch))

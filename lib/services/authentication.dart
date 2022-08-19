@@ -49,4 +49,9 @@ class Authentication {
     }
     return msg;
   }
+
+  signOut() async {
+    await _auth.signOut();
+  }
+
 }
