@@ -1,3 +1,4 @@
+import 'package:accord/screens/create_group.dart';
 import 'package:accord/screens/login_screen.dart';
 import 'package:accord/services/authentication.dart';
 import 'package:accord/utils/colors.dart';
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ListTile(
                 tileColor: Colors.white,
                 onTap: ()  {
-                  
+                  Get.to(CreateGroupScreen());
                 },
                 leading: const Icon(
                   Icons.group_sharp,
