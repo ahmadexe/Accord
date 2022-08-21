@@ -38,4 +38,20 @@ class CloudDatabase {
       return e.toString();
     }
   }
+
+  sendMessage(String body, String senderName, String senderId, String groupId) async {
+    try {
+      final String messageId = const Uuid().v1();
+      await _firestore.collection('groups').doc(groupId).collection('messages').doc(messageId).set({
+        'senderName': senderName,
+        'senderId': senderId,
+        'groupId': groupId,
+        'message': body,
+        'messageId': messageId,
+        'timestamp': DateTime.now().microsecondsSinceEpoch,
+      });
+    } catch(e) {
+      print(e.toString());
+    }
+  }
 }
