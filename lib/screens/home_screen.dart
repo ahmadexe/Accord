@@ -28,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarColor: primaryColor,
-        //or set color with: Color(0xFF0000FF)
         statusBarIconBrightness: Brightness.light));
     return SafeArea(
       child: Scaffold(
@@ -72,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ListTile(
                 tileColor: Colors.white,
                 onTap: () {
-                  Get.to(CreateGroupScreen());
+                  Get.to(const CreateGroupScreen());
                 },
                 leading: const Icon(
                   Icons.group_sharp,

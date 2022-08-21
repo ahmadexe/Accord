@@ -11,4 +11,4 @@
     -> Admin
     -> members
     -> Admin id
-    -> messages (collection) (sender, text, time (since epoch))
+    -> messages (collection) (senderid, text, time (since epoch))
