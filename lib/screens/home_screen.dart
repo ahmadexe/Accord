@@ -1,4 +1,5 @@
 import 'package:accord/screens/create_group.dart';
+import 'package:accord/screens/group_screen.dart';
 import 'package:accord/screens/login_screen.dart';
 import 'package:accord/services/authentication.dart';
 import 'package:accord/utils/colors.dart';
@@ -218,12 +219,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         if (snapshot.data!.docs[index]['members']
                             .contains(FirebaseAuth.instance.currentUser!.uid)) {
-                              print(FirebaseAuth.instance.currentUser!.uid);
                           return UsersRooms(
                             snap: snapshot.data!.docs[index],
+                            ontap: () {
+                              Get.to(GroupScreen(snap: snapshot.data!.docs[index],));
+                            },
                           );
                         } else {
-                          return SizedBox();
+                          return const SizedBox();
                         }
                       });
                 },

@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 
 class UsersRooms extends StatelessWidget {
   final snap;
-  const UsersRooms({required this.snap, super.key});
+  final ontap;
+  const UsersRooms({required this.ontap, required this.snap, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
-        Container(
+        InkWell(
+          onTap: ontap,
+          child: Container(
             height: 100,
             width: MediaQuery.of(context).size.width * 0.90,
             decoration: const BoxDecoration(
@@ -23,49 +26,55 @@ class UsersRooms extends StatelessWidget {
                   )
                 ]),
             child: Row(
-                children: [
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: primaryColor,
-                    child: Center(
-                      child: Text(
-                        snap['groupName'].toString()[0],
-                        style: const TextStyle(color: Colors.white),
-                      ),
+              children: [
+                const SizedBox(
+                  width: 10,
+                ),
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: primaryColor,
+                  child: Center(
+                    child: Text(
+                      snap['groupName'].toString()[0],
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              snap['groupName'].toString(),
-                              style: const TextStyle(
-                                  color: primaryColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 60,
-                              width: MediaQuery.of(context).size.width * 0.65,
-                              child: Text(snap['description'].toString(), overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              softWrap: false,),
-                            )
-                          ],
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        snap['groupName'].toString(),
+                        style: const TextStyle(
+                            color: primaryColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ),
-                  )
-                ],
-              ),
+                      SizedBox(
+                        height: 60,
+                        width: MediaQuery.of(context).size.width * 0.65,
+                        child: Text(
+                          snap['description'].toString(),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
-          const SizedBox(height: 15,)
+        ),
+        const SizedBox(
+          height: 15,
+        )
       ],
     );
   }
