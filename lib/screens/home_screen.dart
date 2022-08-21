@@ -5,6 +5,7 @@ import 'package:accord/utils/colors.dart';
 import 'package:accord/widgets/room_type_card.dart';
 import 'package:accord/widgets/users_rooms.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -198,24 +199,33 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 15,
               ),
-
-
-
               StreamBuilder(
-                stream: FirebaseFirestore.instance.collection('groups').snapshots(),
-                builder: (context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+                stream:
+                    FirebaseFirestore.instance.collection('groups').snapshots(),
+                builder: (context,
+                    AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                        snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
-                      child: CircularProgressIndicator(color: primaryColor,),
+                      child: CircularProgressIndicator(
+                        color: primaryColor,
+                      ),
                     );
                   }
                   return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      return UsersRooms(snap: snapshot.data!.docs[index],);
-                    }
-                  );
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        if (snapshot.data!.docs[index]['members']
+                            .contains(FirebaseAuth.instance.currentUser!.uid)) {
+                              print(FirebaseAuth.instance.currentUser!.uid);
+                          return UsersRooms(
+                            snap: snapshot.data!.docs[index],
+                          );
+                        } else {
+                          return SizedBox();
+                        }
+                      });
                 },
               )
             ],

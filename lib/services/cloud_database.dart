@@ -1,9 +1,11 @@
+import 'package:accord/global/random_id_generator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
 
 class CloudDatabase {
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<String> createGroup(String name, String description, String type) async {
     try {
@@ -13,7 +15,7 @@ class CloudDatabase {
       DocumentSnapshot adminDocument =
           await _firestore.collection('users').doc(adminId).get();
       String adminName = (adminDocument.data() as dynamic)['name'];
-
+      String publicId = RandomUserDefine.getRandomString(8);
       await _firestore.collection('groups').doc(groupId).set({
         'groupid': groupId,
         'groupName': name,
@@ -22,7 +24,8 @@ class CloudDatabase {
         'adminName': adminName,
         'type': type,
         'members': [adminId],
-        'messages': []
+        'messages': [],
+        'publicid': publicId,
       });
 
       await _firestore.collection('users').doc(adminId).update({
