@@ -96,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
+          physics: ScrollPhysics(),
           child: Column(
             children: [
               const SizedBox(
@@ -214,6 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                   return ListView.builder(
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         if (snapshot.data!.docs[index]['members']

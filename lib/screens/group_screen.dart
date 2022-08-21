@@ -1,5 +1,9 @@
+import 'package:accord/models/user.dart';
 import 'package:accord/utils/colors.dart';
+import 'package:accord/widgets/groups_messages.dart';
 import 'package:accord/widgets/users_messages.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -13,14 +17,11 @@ class GroupScreen extends StatefulWidget {
 }
 
 class _GroupScreenState extends State<GroupScreen> {
-
-  late ScrollController _scrollController;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _scrollController = ScrollController();
   }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
@@ -49,12 +50,11 @@ class _GroupScreenState extends State<GroupScreen> {
             Container(
               height: MediaQuery.of(context).size.height * 0.80,
               child: ListView.builder(
-                  controller: _scrollController,
                   shrinkWrap: true,
                   reverse: true,
                   itemCount: 30,
                   itemBuilder: (context, index) {
-                    return UsersMessages();
+                    return GroupMessages();
                   }),
             ),
             Row(
@@ -81,10 +81,16 @@ class _GroupScreenState extends State<GroupScreen> {
                         ),
                       )),
                 ),
-                  CircleAvatar(
+                CircleAvatar(
                     backgroundColor: secondaryColor,
                     child: Center(
-                        child: IconButton(color: secondaryColor, onPressed: (){}, icon: const Icon(Icons.send, color: Colors.white,)) ))
+                        child: IconButton(
+                            color: secondaryColor,
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.send,
+                              color: Colors.white,
+                            ))))
               ],
             ),
           ],

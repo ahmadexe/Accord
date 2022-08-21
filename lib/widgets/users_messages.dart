@@ -12,7 +12,7 @@ class UsersMessages extends StatelessWidget {
         top: 4,
         bottom: 4,
         left: 0,
-        right: 24
+        right: 20
       ),
       alignment: Alignment.centerRight,
       child: Container(
