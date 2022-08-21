@@ -199,12 +199,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 15,
               ),
 
+
+
               StreamBuilder(
                 stream: FirebaseFirestore.instance.collection('groups').snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: const CircularProgressIndicator(color: primaryColor,),
+                    return const Center(
+                      child: CircularProgressIndicator(color: primaryColor,),
                     );
                   }
                   return ListView.builder(
