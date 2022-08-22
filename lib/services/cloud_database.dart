@@ -24,7 +24,6 @@ class CloudDatabase {
         'adminName': adminName,
         'type': type,
         'members': [adminId],
-        'messages': [],
         'publicid': publicId,
       });
 

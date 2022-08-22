@@ -2,8 +2,8 @@ import 'package:accord/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class UsersMessages extends StatelessWidget {
-  // final snap;
-  const UsersMessages({super.key});
+  final snap;
+  const UsersMessages({required this.snap,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +29,8 @@ class UsersMessages extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('User name', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-            Text('This is Message', style: TextStyle(color: Colors.white),)
+            Text(snap['senderName'], style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+            Text(snap['message'], style: TextStyle(color: Colors.white),)
           ],
         ),
       ),

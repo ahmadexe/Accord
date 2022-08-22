@@ -1,4 +1,5 @@
-import 'package:accord/models/user.dart';
+import 'package:accord/global/user_state.dart';
+import 'package:accord/services/cloud_database.dart';
 import 'package:accord/utils/colors.dart';
 import 'package:accord/widgets/groups_messages.dart';
 import 'package:accord/widgets/users_messages.dart';
@@ -17,9 +18,17 @@ class GroupScreen extends StatefulWidget {
 }
 
 class _GroupScreenState extends State<GroupScreen> {
+  late TextEditingController _messageController;
+  late String username;
   @override
   void initState() {
+    _messageController = TextEditingController();
+    getData();
     super.initState();
+  }
+
+  getData() async {
+    username = await UserState.getUsersName();
   }
 
   @override
@@ -48,15 +57,37 @@ class _GroupScreenState extends State<GroupScreen> {
               height: 10,
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.80,
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  reverse: true,
-                  itemCount: 30,
-                  itemBuilder: (context, index) {
-                    return GroupMessages();
-                  }),
-            ),
+                height: MediaQuery.of(context).size.height * 0.80,
+                child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('groups')
+                        .doc(widget.snap['groupid'])
+                        .collection('messages')
+                        .orderBy('timestamp', descending: true)
+                        .snapshots(),
+                    builder: (context,
+                        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                            snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: primaryColor,
+                          ),
+                        );
+                      }
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        reverse: true,
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            if (snapshot.data!.docs[index]['senderId'] ==
+                                FirebaseAuth.instance.currentUser!.uid) {
+                              return UsersMessages(snap:snapshot.data!.docs[index]);
+                            } else {
+                              return GroupMessages(snap:snapshot.data!.docs[index]);
+                            }
+                          });
+                    })),
             Row(
               children: [
                 Container(
@@ -64,6 +95,7 @@ class _GroupScreenState extends State<GroupScreen> {
                   child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: TextFormField(
+                        controller: _messageController,
                         cursorColor: secondaryColor,
                         decoration: const InputDecoration(
                           hintText: "Send a message",
@@ -86,7 +118,13 @@ class _GroupScreenState extends State<GroupScreen> {
                     child: Center(
                         child: IconButton(
                             color: secondaryColor,
-                            onPressed: () {},
+                            onPressed: () async {
+                              await CloudDatabase().sendMessage(
+                                  _messageController.text,
+                                  username,
+                                  FirebaseAuth.instance.currentUser!.uid,
+                                  widget.snap['groupid']);
+                            },
                             icon: const Icon(
                               Icons.send,
                               color: Colors.white,
