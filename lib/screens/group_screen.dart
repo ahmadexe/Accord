@@ -48,6 +48,9 @@ class _GroupScreenState extends State<GroupScreen> {
         title: Text(
           widget.snap['groupName'],
         ),
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.info, color: Colors.white,))
+        ],
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       body: SingleChildScrollView(
