@@ -4,10 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
 
 class CloudDatabase {
-  
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<String> createGroup(String name, String description, String type) async {
+  Future<String> createGroup(
+      String name, String description, String type) async {
     try {
       String msg = 'success';
       String groupId = const Uuid().v1();
@@ -39,10 +39,16 @@ class CloudDatabase {
     }
   }
 
-  sendMessage(String body, String senderName, String senderId, String groupId) async {
+  sendMessage(
+      String body, String senderName, String senderId, String groupId) async {
     try {
       final String messageId = const Uuid().v1();
-      await _firestore.collection('groups').doc(groupId).collection('messages').doc(messageId).set({
+      await _firestore
+          .collection('groups')
+          .doc(groupId)
+          .collection('messages')
+          .doc(messageId)
+          .set({
         'senderName': senderName,
         'senderId': senderId,
         'groupId': groupId,
@@ -50,8 +56,35 @@ class CloudDatabase {
         'messageId': messageId,
         'timestamp': DateTime.now().microsecondsSinceEpoch,
       });
-    } catch(e) {
+    } catch (e) {
       print(e.toString());
+    }
+  }
+
+  Future<String> searchGroup(String publicId, String userId) async {
+    String response = "An error occurred while searching";
+    try {
+      await _firestore
+          .collection('groups')
+          .where('publicid', isEqualTo: publicId)
+          .get()
+          .then((QuerySnapshot querySnapshot) async {
+        for (var doc in querySnapshot.docs) {
+          if (doc['members'].contains(userId)) {
+            response = 'You are already a member of this group.';
+            return response;
+          } else {
+            await _firestore.collection('groups').doc(doc['groupid']).update({
+              'members': FieldValue.arrayUnion([userId]),
+            });
+            response = 'You have joined this group!';
+            return response;
+          }
+        }
+      });
+      return response;
+    } catch (e) {
+      return response;
     }
   }
 }

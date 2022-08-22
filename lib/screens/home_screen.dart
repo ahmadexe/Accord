@@ -2,6 +2,7 @@ import 'package:accord/screens/create_group.dart';
 import 'package:accord/screens/group_screen.dart';
 import 'package:accord/screens/login_screen.dart';
 import 'package:accord/services/authentication.dart';
+import 'package:accord/services/cloud_database.dart';
 import 'package:accord/utils/colors.dart';
 import 'package:accord/widgets/room_type_card.dart';
 import 'package:accord/widgets/users_rooms.dart';
@@ -23,6 +24,21 @@ class _HomeScreenState extends State<HomeScreen> {
   String scienceAddress = 'assets/images/space.jpg';
   String sportsAddress = 'assets/images/sports.jpg';
   String dailyAddress = 'assets/images/newspaper.jpg';
+
+  final TextEditingController _groupController = TextEditingController();
+
+  joinGroup(String groupId, String userId) async {
+    String response = await CloudDatabase().searchGroup(groupId, userId);
+    if (response == 'You are already a member of this group.') {
+      Get.snackbar('Whoops!', response, backgroundColor: primaryColor, snackPosition: SnackPosition.TOP, colorText: Colors.white, icon: const Icon(Icons.group));
+    }
+    else if (response == 'You have joined this group!') {
+      Get.snackbar('Congratulations!', response, backgroundColor: Colors.green, snackPosition: SnackPosition.TOP, colorText: Colors.white, icon: const Icon(Icons.done));
+    }
+    else {
+      Get.snackbar('Error!', response, backgroundColor: Colors.red, snackPosition: SnackPosition.TOP, colorText: Colors.white, icon: const Icon(Icons.error));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: TextFormField(
+                    controller: _groupController,
                     cursorColor: secondaryColor,
                     decoration: InputDecoration(
                         hintText: "Enter group ID",
@@ -121,7 +138,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(30)),
                         ),
                         suffixIcon: IconButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              await joinGroup(_groupController.text, FirebaseAuth.instance.currentUser!.uid);
+                            },
                             icon: const Icon(
                               Icons.arrow_forward,
                               color: secondaryColor,
