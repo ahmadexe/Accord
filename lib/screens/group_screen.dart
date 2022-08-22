@@ -1,4 +1,5 @@
 import 'package:accord/global/user_state.dart';
+import 'package:accord/screens/group_info_screen.dart';
 import 'package:accord/services/cloud_database.dart';
 import 'package:accord/utils/colors.dart';
 import 'package:accord/widgets/groups_messages.dart';
@@ -49,14 +50,14 @@ class _GroupScreenState extends State<GroupScreen> {
           widget.snap['groupName'],
         ),
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.info, color: Colors.white,))
+          IconButton(onPressed: (){Get.to(InfoScreen(snap: widget.snap));}, icon: const Icon(Icons.info, color: Colors.white,))
         ],
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
